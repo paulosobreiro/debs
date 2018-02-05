@@ -1,0 +1,25 @@
+<div class="panel-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+									<i class="fa fa-usd  color-ico-valor "></i>  <span> Saldo inicial</span>
+                                    <span class="pull-right text-muted small"><em>{{valorFormatado("inicial")}}</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-plus-square color-ico-credito"></i> <span>Créditos</span>
+                                    <span class="pull-right text-muted small"><em>{{valorFormatado("credito")}}</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-minus-square color-ico-debito"></i> <span>Débitos</span>
+                                    <span class="pull-right text-muted small"><em>{{valorFormatado("debito")}}</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-usd color-ico-valor"></i> 
+									<span>Saldo FInal</span>
+                                    <span class="pull-right text-muted small"><em><b>{{valorFormatado("final")}}</b></em>
+                                    </span>
+                                </a>                          
+                        	</div>
+						</div>

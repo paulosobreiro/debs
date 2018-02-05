@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Negociações</title>
+		<meta charset="UTF-8">
+	
+		
+		<link rel="stylesheet" href="../app/css/bootstrap.css">
+		<link rel="stylesheet" href="../app/css/bootstrap-theme.css">
+		
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+		<link rel="stylesheet" href="../app/css/finance.css"> <!--CSS prioritario-->
+		<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"> </script>
+		
+		<script src="../app/helpers/DateHelper.js"></script>
+		<script src="../app/helpers/NumericoHelper.js"></script>
+		<script src="../app/controllers/Controller.js"> </script>
+	</head>
+	
+	<body class="" ng-app="extratoApp" ng-controller="extratoCtrl" ng-init="init()" >
+		<div class="ps-container bg-branco"   >  <!-- Painel base branco  -->
+			<!---------------------------------------------------------->
+			<!-- Logotipo                                             -->
+			<!---------------------------------------------------------->
+			<div class="logotipo"></div>	
+		
+			<div class="row ps-row-padding-24 ">
+				
+				<!--------------------------------------------------------------------->
+				<!-- Coluna da esquerda | Entrada de valore e paineis de totalização -->
+				<!--------------------------------------------------------------------->	
+				<div class="col-lg-3 col-md-4 col-sm-12  ">
+					<div class="ps-panel">
+						<!--<div class="ps-panel-heading"> 
+							<h3 class="text-center">Lançamento</h3>              
+						</div> -->
+						<div class="ps-panel-body bg-branco"> 
+							<!-- <label>Data</label> <label >Descrição</label> <label >Valor</label> -->
+							<input class="ps-input-control ps-input-group" 
+								   name="data" 
+								   type="date"
+								   maxlength="12"
+								   class="placeholder-input"
+								   placeholder="data"
+								   ng-focus="mensagem = 'Preencha a data do lançamento'"
+								   ng-model="data">  
+							
+							<input class="ps-input-control ps-input-group"
+								   name="descricao"
+								   type="text"
+								   value = 0
+								   maxlength="20"
+								   class="placeholder-input"
+								   placeholder="descricao"
+								   ng-focus="mensagem = 'Preencha a descrição do lançamento'"
+								   ng-model="descricao">
+							
+							<input class="ps-input-control ps-input-group" 
+								   name="valor"
+								   type="number"
+								   value = 0
+								   maxlength="20"
+								   class="placeholder-input"
+								   placeholder="valor"
+								   ng-focus="mensagem = 'Preencha o valor do lançamento'"
+								   ng-model="valor">
+							<div class="text-right">
+								<button class="btn btn-default" ng-click="incluir('Debito')">Debito</button>
+								<button class="btn btn-default" ng-click="incluir('Credito')">Credito</button>
+							</div>
+						</div>
+						<!-- <div class="panel-footer bg-azul"  >	</div>  -->
+						
+						{{mensagem}}
+						
+					</div> 
+					<!---------------- SALDOS ----------------------------
+					<div class="ps-panel-body"> -->
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+									<i class="fa fa-usd  color-ico-valor "></i>  
+									<span > Saldo inicial</span>
+                                    <span class="pull-right bg-branco small"><em>{{formatInicial}}</em>
+                                    </span>
+								</a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-plus-square color-ico-credito"></i> <span>Créditos</span>
+                                    <span class="pull-right bg-branco small"><em>{{formatCredito}}</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-minus-square color-ico-debito"></i> <span>Débitos</span>
+                                    <span class=" pull-right bg-branco small"><em>{{formatDebito}}</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-usd color-ico-valor"></i> 
+									<span>Saldo FInal</span>
+                                    <span class="pull-right bg-branco small"><em><b>{{formatFinal}}</b></em>
+                                    </span>
+                                </a>                          
+                        	</div>
+						
+                      <!---------------- SALDOS ---------------------------->
+               </div>
+				
+				<!--------------------------------------------------------------------->
+				<!-- Coluna da direita | Tabela de moviemnto -------------------------->
+				<!--------------------------------------------------------------------->	
+				<div class="col-lg-9 col-md-8 col-sm-12 ">
+
+					<!----------------------------------------------------------> 
+					<!---  Tabela ---------------------------------------------->
+					<!---------------------------------------------------------->
+					<div class="col-lg-12 col-md-12 col-sm-12 zeroMargin">	
+						
+								<div class="table-responsive" ng-hide = "infoExtrato.length ==0" >
+									<table class="table table-striped table-bordered table-hover">
+										<thead>
+											<tr>
+												<th class="col-lg-1">#</th>
+												<th class="col-lg-2">Data</th>
+												<th class="col-lg-3">Descrição</th>
+												<th class="col-lg-2">Credito</th>
+												<th class="col-lg-2">Valor</th>	
+												<th class="col-lg-2">Saldo</th>	
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="registro in extrato">			
+												<td><i class="btn fa fa-trash-o" ng-click="apagar($index)" title="Apagar"></i></td>
+												<td class= "text-center">{{registro.data }}</td>
+												<td>{{registro.descricao}}</td>
+												<td class= "text-right">{{registro.credito}}</td>
+												<td class= "text-right">{{registro.debito}}</td>
+												<td class= "text-right">{{registro.saldo}}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+					
+					<!---  Fim Tabela ------->	
+				</div>			
+			</div>
+				
+			</div>	
+		</div>	
+		
+		<div class="text-center">
+			<span class="bg-azul">2016| Aplicação Demo </span>
+		</div>
+	</body>
+</html>
